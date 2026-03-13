@@ -114,11 +114,32 @@ public ProjetoCalculadora() {
      constraints.weightx = 1 ;
      constraints.fill = GridBagConstraints.BOTH;
      addComponent (scroll, 0,0,5,1);
-     addComponent
-     addComponent
-     addComponent
-     addComponent
-
+     addComponent (visor,1,0,5,1,);
+     addComponent (botao2dig,2,0,1,1,);
+     addComponent (botao4dig,2,1,1,1);
+     addComponent (botao6dig (2,2,3,1);
+     contraints.weghtx = 0;
+     contraints.weghtx = 5;
+     addComponent(botaoPerc, 3,0,1,1);
+     addComponent(botaoCE, 3,4,1,1);
+     addComponent(botaoC, 4,4,1,1);
+     addComponent(botaoBackspace, 5,4,1,1);
+     addComponent(botaoDiv, 3,1,1,1,);
+     addComponent(botaoMultip, 3,2,1,1);
+     addComponent(botaoMenos, 3,3,1,1);
+     addComponent(botao7, 4,0,1,1);
+     addComponent(botao8, 4,1,1,1);
+     addComponent(botao9, 4,2,1,1);
+     addComponent(botaoMais, 4,3,1,1);
+     addComponent(botao4, 5,0,1,1);
+     addComponent(botao5, 5,1,1,1);
+     addComponent(botao6, 5,2,1,2);
+     addComponent(botaoVirgula, 5,3,1,1);
+     addComponent(botao1, 6,0,1,1);
+     addComponent(botao2, 6,1,1);
+     addComponent(botao3, 6,2,1,1);
+     addComponent(botao0, 6,3,1,1);
+     addComponent(botaoTotal, 6,4,1,1);
 
 
 
