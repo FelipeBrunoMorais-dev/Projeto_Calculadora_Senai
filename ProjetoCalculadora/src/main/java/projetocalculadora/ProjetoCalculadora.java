@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import static jdk.internal.org.jline.utils.Colors.s;
+
 public class ProjetoCalculadora  extends JFrame implements KeyListener {
     private JButton botao1,botao2, botao3, botao4, botao5, botao6, botao7, botao8, botao9, botao0,
             botaoC, botaoCE, botaoDiv, botaoMultip, botaoMenos, botaoMais,botaoVirgula, botaoTotal,
@@ -19,9 +21,24 @@ public class ProjetoCalculadora  extends JFrame implements KeyListener {
     private JRadioButton botao2dig, botao4dig, botao6dig;
     private ButtonGroup botaoDecimais;
     private int casasDecimais = 2;
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
 }
 
-private public class trataEventosAcao implements ActionListener {
+private class trataEventosAcao implements ActionListener {
     public void actionPerformed(ActionListener event) {
         if (event.getSource() == botaoC) teclouC();
         else if  (event.getSource() == botaoCE) teclouCE();
@@ -44,6 +61,11 @@ private public class trataEventosAcao implements ActionListener {
         else if  (event.getSource() == botaoDiv) teclouDiv();
         else if  (event.getSource() == botaoMultip) teclouMultip();
         else if  (event.getSource() == botaoTotal) teclouEnter();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }
 
@@ -82,7 +104,7 @@ public void KeyPressed (KeyEvent e){
     if(e.getKeycode()== 69) teclouCE();
     if(e.getKeycode()==8) teclouBackspace();
     if(e.getKeyCode()== 110) teclouVirgula();
-    if(((e.getKeyCode() >= e.VK_0) && (e.getKeyCode() <= e.VK_9)) || getKeyCode() >= e.VK_NUMPAD0) && (e.getKeyCode() <= e.VK_NUMPAD9))) teclouNumeros(""getKeyChar());
+    if(((e.getKeyCode() >= e.VK_0) && (e.getKeyCode() <= e.VK_9)) || (e.getKeyCode() >= e.VK_NUMPAD0) && (e.getKeyCode() <= e.VK_NUMPAD9)) teclouNumeros("" + e.getKeyChar());
     if ((e.getKeyCode() == 61) || (e.getKeyCode() == 107)) teclouMais();
     if ((e.getKeyCode() == 45) || (e.getKeyCode() == 109)) teclouMenos();
     if ((e.getKeyCode() == 59) || (e.getKeyCode() == 111)) teclouDiv();
@@ -116,7 +138,7 @@ public  void teclouCE(){
 
 public void teclouP(){
     roloPapel.append(alinhaStringDir(formatSrNumerica(valor,casaDecimais)
-            + "%" + "\n");
+            + "%" + "\n"));
     roloPapel.append(alinhaStringDir("-----------------------" + "\n"));
     if(operador == "*") soma = soma* (Double.parseDouble(valor)/100);
     else if (operador == "/") soma = soma* (Double.parseDouble(valor)/100);
@@ -143,7 +165,7 @@ public void teclouBackspace(){
 }
 
 public void teclouNumeros(String s){
-    if (valor.length() < = 14){
+    if (valor.length() <= 14){
         if (valor == "0") valor = "";
         valor = valor + s;
         visor.setText(valor);
@@ -153,7 +175,7 @@ public void teclouNumeros(String s){
 public void teclouMais(){
     if (valor == "") valor = valorAnterior;
     roloPapel.append(alinhaStringDir(formatSrNumerica(valor,casaDecimais)
-            + "%" + "\n");
+            + "%" + "\n"));
     soma = soma + Double.parseDouble(valor);
     visor.setText (formatSrNumerica("" + soma, casasDecimais));
     valorAnterior = valor;
@@ -166,7 +188,7 @@ public void teclouMais(){
 public void teclouMenos(){
     if (valor == "") valor = valorAnterior;
     roloPapel.append(alinhaStringDir(formatSrNumerica(valor,casaDecimais)
-            + "%" + "\n");
+            + "%" + "\n"));
     soma = soma - Double.parseDouble(valor);
     visor.setText (formatSrNumerica("" + soma, casasDecimais));
     valorAnterior = valor;
@@ -177,7 +199,7 @@ public void teclouMenos(){
 public void teclouDiv(){
     if (valor == "") valor = valorAnterior;
     roloPapel.append(alinhaStringDir(formatSrNumerica(valor,casaDecimais)
-            + "%" + "\n");
+            + "%" + "\n"));
     soma = Double.parseDouble(valor);
     visor.setText (formatSrNumerica("" + soma, casasDecimais));
     valorAnterior = valor;
@@ -196,13 +218,13 @@ public void teclouMultip(){
     operador = "*";
 }
 
-public void teclouEnter(){
-    if((operador == "+") || (operador == "-")){
+public void teclouEnter() {
+    if ((operador == "+") || (operador == "-")) {
         rolopapel.append(alinharStringDir("--------------------" + "\n"));
         rolopapel.append(alinharStringDir(formatStrNumerica("" + soma, casasDecimais)
                 + "T" + "\n"));
     }
-    if((operador == "/") && (soma != 0)){
+    if ((operador == "/") && (soma != 0)) {
         rolopapel.append(alinharStringDir(formatStrNumerica(valor, casasDecimais)
                 + "" + "\n"));
         rolopapel.append(alinharStringDir("--------------------" + "\n"));
@@ -210,7 +232,7 @@ public void teclouEnter(){
         rolopapel.append(alinharStringDir(formatStrNumerica("" + soma, casasDecimais)
                 + "-" + "\n"));
     }
-    if(operador == "*"){
+    if (operador == "*") {
         rolopapel.append(alinharStringDir(formatStrNumerica(valor, casasDecimais)
                 + "+" + "\n"));
         rolopapel.append(alinharStringDir("--------------------" + "\n"));
@@ -224,6 +246,7 @@ public void teclouEnter(){
         valor = "";
 
     }
+}
 
     public String alinhaStringDir(String s){
         String alinhador = "";
