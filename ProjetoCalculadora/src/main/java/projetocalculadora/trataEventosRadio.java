@@ -1,6 +1,7 @@
 package projetocalculadora;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
@@ -135,3 +136,49 @@ public void teclouP(){
         valorAnterior = valor;
         valor ="";
         operador = "/";    }
+
+
+
+
+// /////////////////////////////
+trataEventosAcao handletAcao = new trataEventosAcao ();
+botaoC.addActionListener(handletAcao);
+botaoCE.addActionListener(handletAcao);
+botaoPerc.addActionListener(handletAcao);
+botaoDiv.addActionListener(handletAcao);
+botaoMultip.addActionListener(handletAcao);
+botaoMenos.addActionListener(handletAcao);
+botaoMais.addActionListener(handletAcao);
+botaoTotal.addActionListener(handletAcao);
+botaoVirgula.addActionListener(handletAcao);
+botao1.addActionListener(handletAcao);
+botao2.addActionListener(handletAcao);
+botao3.addActionListener(handletAcao);
+botao4.addActionListener(handletAcao);
+botao5.addActionListener(handletAcao);
+botao6.addActionListener(handletAcao);
+botao7.addActionListener(handletAcao);
+botao8.addActionListener(handletAcao);
+botao9.addActionListener(handletAcao);
+botao0.addActionListener(handletAcao);
+botaoBackspace.addActionListener(handletAcao);
+
+trataEventosFocus handletAcao = new trataEventosFocus();
+trataEventosRadio handletAcao = new trataEventosRadio();
+botao2dig.addActionListener(handletAcao);
+botao1dig.addActionListener(handletAcao);
+botao6dig.addActionListener(handletAcao);
+visor.addKeyListener(this);
+setSize(285,480);
+Dimension resVideo = Toolkit.getDefaultToolkit().getScreenSize();
+Dimension tamForm = getSize();
+setLocation ((resVideo.width - tamForm.width)/2,(resVideo.height - tamForm.height)/2);
+setResizable(false);
+setVisible(true);
+}
+
+public static void main(String[] args) {
+    ProjetoCalculadora app = new ProjetoCalculadora();
+    app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+}
+
