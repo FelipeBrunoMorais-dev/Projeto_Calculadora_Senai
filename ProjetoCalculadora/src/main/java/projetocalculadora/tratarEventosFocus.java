@@ -9,6 +9,7 @@ public class tratarEventosFocus implements FocusListener {
 
     public void focusLost(FocusEvent event){}
 }
+<<<<<<< HEAD
 //  pegar daqui ---------------
 public void teclouMultip(){
     if(valor == "") valor = valorAnterior;
@@ -79,5 +80,7 @@ public void teclouEnter(){
 
 }
 
+=======
+>>>>>>> c7341366ba70593d5ec58bde97f707ba60d3a76d
 
 
