@@ -39,6 +39,7 @@ public static void main (String[] args){
 
 
 
+<<<<<<< HEAD
  //echo "# Main" >> README.md
  //git init
  //git add README.md
@@ -51,3 +52,6 @@ public static void main (String[] args){
  //git push -u origin main
 
 //f209b0065cc80418d5e07ea358c6686a651ceafa
+=======
+
+>>>>>>> c7341366ba70593d5ec58bde97f707ba60d3a76d
