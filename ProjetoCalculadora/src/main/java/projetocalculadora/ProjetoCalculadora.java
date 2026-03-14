@@ -1,16 +1,47 @@
 package projetocalculadora;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
 
-import static jdk.internal.org.jline.utils.Colors.s;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
-public class ProjetoCalculadora  extends JFrame implements KeyListener {
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+
+
+
+
+
+public class ProjetoCalculadora extends JFrame implements KeyListener {
     private JButton botao1,botao2, botao3, botao4, botao5, botao6, botao7, botao8, botao9, botao0,
             botaoC, botaoCE, botaoDiv, botaoMultip, botaoMenos, botaoMais,botaoVirgula, botaoTotal,
             botaoPerc, botaoBackspace;
-    private JTextArea tolopapel;
+    private JTextArea rolopapel;
     private JLabel visor, keyCodigo;
     private JScrollPane scroll;
     private double soma = 0;
@@ -22,60 +53,41 @@ public class ProjetoCalculadora  extends JFrame implements KeyListener {
     private ButtonGroup botaoDecimais;
     private int casasDecimais = 2;
 
-    @Override
-    public void keyTyped(KeyEvent e) {
 
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
-}
 
 private class trataEventosAcao implements ActionListener {
-    public void actionPerformed(ActionListener event) {
+    public void actionPerformed(ActionEvent event) {
         if (event.getSource() == botaoC) teclouC();
-        else if  (event.getSource() == botaoCE) teclouCE();
-        else if  (event.getSource() == botaoPerc) teclouP();
-        else if  (event.getSource() == botaoVirgula) teclouVirgula();
-        else if  (event.getSource() == botaoBackspce) teclouBackspace();
-        else if  (event.getSource() == botaoCE) teclouNumeros("1");
-        else if  (event.getSource() == botaoCE) teclouNumeros("2");
-        else if  (event.getSource() == botaoCE) teclouNumeros("3");
-        else if  (event.getSource() == botaoCE) teclouNumeros("4");
-        else if  (event.getSource() == botaoCE) teclouNumeros("5");
-        else if  (event.getSource() == botaoCE) teclouNumeros("6");
-
-        else if  (event.getSource() == botao7) teclouNumeros(7);
-        else if  (event.getSource() == botao8) teclouNumeros("8");
-        else if  (event.getSource() == botao9) teclouNumeros("9");
-        else if  (event.getSource() == botao0) teclouNumeros("0");
-        else if  (event.getSource() == botaoMais) teclouMais();
-        else if  (event.getSource() == botaoMenos) teclouMenos();
-        else if  (event.getSource() == botaoDiv) teclouDiv();
-        else if  (event.getSource() == botaoMultip) teclouMultip();
-        else if  (event.getSource() == botaoTotal) teclouEnter();
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
+        else if (event.getSource() == botaoCE) teclouCE();
+        else if (event.getSource() == botaoPerc) teclouP();
+        else if (event.getSource() == botaoVirgula) teclouVirgula();
+        else if (event.getSource() == botaoBackspace) teclouBackspace();
+        else if (event.getSource() == botaoCE) teclouNumeros("1");
+        else if (event.getSource() == botaoCE) teclouNumeros("2");
+        else if (event.getSource() == botaoCE) teclouNumeros("3");
+        else if (event.getSource() == botaoCE) teclouNumeros("4");
+        else if (event.getSource() == botaoCE) teclouNumeros("5");
+        else if (event.getSource() == botaoCE) teclouNumeros("6");
+        else if (event.getSource() == botao7) teclouNumeros("7");
+        else if (event.getSource() == botao8) teclouNumeros("8");
+        else if (event.getSource() == botao9) teclouNumeros("9");
+        else if (event.getSource() == botao0) teclouNumeros("0");
+        else if (event.getSource() == botaoMais) teclouMais();
+        else if (event.getSource() == botaoMenos) teclouMenos();
+        else if (event.getSource() == botaoDiv) teclouDiv();
+        else if (event.getSource() == botaoMultip) teclouMultip();
+        else if (event.getSource() == botaoTotal) teclouEnter();
     }
 }
 
-public class tratarEventosFocus implements FocusListener {
+
+public class trataEventosFocus implements FocusListener {
     public void focusGained(FocusEvent event){}
 
     public void focusLost(FocusEvent event){}
 }
 
-public class trataEventosRadio implements ItemListener {
+private class trataEventosRadio implements ItemListener {
     public void itemStateChanged(ItemEvent event){
         if (event.getSource() == botao2dig){
             casasDecimais = 2;
@@ -93,66 +105,77 @@ public class trataEventosRadio implements ItemListener {
 
 public void KeyPressed (KeyEvent e){
     if (e.getKeyCode() == e.VK_ESCAPE){
-        int selectedOption = JOptionPane.showOptionDialog(this,"Deseja SAir.mene???");
-        if(SelectedOption == JOptionPane.YES_NO_OPTION) {
+        int selectedOption = JOptionPane.showConfirmDialog(this,"Deseja SAir.mene???");
+        if(selectedOption == JOptionPane.YES_NO_OPTION) {
             dispose();
             System.exit(0);
         }
 
     }
     if(e.getKeyCode() == 67) teclouC();
-    if(e.getKeycode()== 69) teclouCE();
-    if(e.getKeycode()==8) teclouBackspace();
+    if(e.getKeyCode()== 69) teclouCE();
+    if(e.getKeyCode()==8) teclouBackspace();
     if(e.getKeyCode()== 110) teclouVirgula();
     if(((e.getKeyCode() >= e.VK_0) && (e.getKeyCode() <= e.VK_9)) || (e.getKeyCode() >= e.VK_NUMPAD0) && (e.getKeyCode() <= e.VK_NUMPAD9)) teclouNumeros("" + e.getKeyChar());
     if ((e.getKeyCode() == 61) || (e.getKeyCode() == 107)) teclouMais();
     if ((e.getKeyCode() == 45) || (e.getKeyCode() == 109)) teclouMenos();
     if ((e.getKeyCode() == 59) || (e.getKeyCode() == 111)) teclouDiv();
     if (e.getKeyCode() == 106)  teclouMultip();
-    if (e.getKeyCode() == 80)  TeclouP();
+    if (e.getKeyCode() == 80)  teclouP();
     if (e.getKeyCode() == 10)  teclouEnter();
 }
 
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
 public void keyReleased (KeyEvent e){
 
 }
 
-public void KeyTiped(KeyEvent e){
+public void KeyTyped(KeyEvent e){
 
 }
 
 public void teclouC(){
     valor = "0";
-    visor.setText (formatSrNumerica(valor,casaDecimais));
+    visor.setText (formatStrNumerica(valor,casasDecimais));
 
 }
 
 public  void teclouCE(){
     valor = "0";
     soma = 0;
-    visor.setText (formatSrNumerica(valor,casaDecimais));
-    roloPapel.append(alinhaStringDir("-----------------------" + "\n"));
-    roloPapel.append(alinhaStringDir("" + "\n"));
+    visor.setText (formatStrNumerica(valor,casasDecimais));
+    rolopapel.append(alinhaStringDir("-----------------------" + "\n"));
+    rolopapel.append(alinhaStringDir("" + "\n"));
 
 }
 
 public void teclouP(){
-    roloPapel.append(alinhaStringDir(formatSrNumerica(valor,casaDecimais)
+    rolopapel.append(alinhaStringDir(formatStrNumerica(valor,casasDecimais)
             + "%" + "\n"));
-    roloPapel.append(alinhaStringDir("-----------------------" + "\n"));
+    rolopapel.append(alinhaStringDir("-----------------------" + "\n"));
     if(operador == "*") soma = soma* (Double.parseDouble(valor)/100);
     else if (operador == "/") soma = soma* (Double.parseDouble(valor)/100);
-    roloPapel.append(alinhaStringDir(formatSrNumerica("" + soma, casasDecimais)
+    rolopapel.append(alinhaStringDir(formatStrNumerica("" + soma, casasDecimais)
             + "\n"));
-    roloPapel.append(alinhaStringDir("" + "\n"));
-    visor.setTex(formatSrNumerica(""+ soma,casasDecimais));
+    rolopapel.append(alinhaStringDir("" + "\n"));
+    visor.setText(formatStrNumerica(""+ soma,casasDecimais));
     valorAnterior =  "" + soma;
     soma = 0;
     valor = "";
 }
 
 public void teclouVirgula(){
-    if (valor.lastIndexof('.') == -1) valor = valor + ".";
+    if (valor.lastIndexOf('.') == -1) valor = valor + ".";
     visor.setText(valor);
 }
 
@@ -174,10 +197,10 @@ public void teclouNumeros(String s){
 
 public void teclouMais(){
     if (valor == "") valor = valorAnterior;
-    roloPapel.append(alinhaStringDir(formatSrNumerica(valor,casaDecimais)
+    rolopapel.append(alinhaStringDir(formatStrNumerica(valor,casasDecimais)
             + "%" + "\n"));
     soma = soma + Double.parseDouble(valor);
-    visor.setText (formatSrNumerica("" + soma, casasDecimais));
+    visor.setText (formatStrNumerica("" + soma, casasDecimais));
     valorAnterior = valor;
     valor ="";
     operador = "+";
@@ -187,10 +210,10 @@ public void teclouMais(){
 
 public void teclouMenos(){
     if (valor == "") valor = valorAnterior;
-    roloPapel.append(alinhaStringDir(formatSrNumerica(valor,casaDecimais)
+    rolopapel.append(alinhaStringDir(formatStrNumerica(valor,casasDecimais)
             + "%" + "\n"));
     soma = soma - Double.parseDouble(valor);
-    visor.setText (formatSrNumerica("" + soma, casasDecimais));
+    visor.setText (formatStrNumerica("" + soma, casasDecimais));
     valorAnterior = valor;
     valor ="";
     operador = "-";
@@ -198,19 +221,19 @@ public void teclouMenos(){
 
 public void teclouDiv(){
     if (valor == "") valor = valorAnterior;
-    roloPapel.append(alinhaStringDir(formatSrNumerica(valor,casaDecimais)
+    rolopapel.append(alinhaStringDir(formatStrNumerica(valor,casasDecimais)
             + "%" + "\n"));
     soma = Double.parseDouble(valor);
-    visor.setText (formatSrNumerica("" + soma, casasDecimais));
+    visor.setText (formatStrNumerica("" + soma, casasDecimais));
     valorAnterior = valor;
     valor ="";
     operador = "/";    }
 
 public void teclouMultip(){
     if(valor == "") valor = valorAnterior;
-    rolopapel.append(alinharStringDir("--------------------" + "\n"));
-    rolopapel.append(alinharStringDir("" + "\n"));
-    rolopapel.append(alinharStringDir(formatStrNumerica(valor, casasDecimais)
+    rolopapel.append(alinhaStringDir("--------------------" + "\n"));
+    rolopapel.append(alinhaStringDir("" + "\n"));
+    rolopapel.append(alinhaStringDir(formatStrNumerica(valor, casasDecimais)
             + "*" + "\n"));
     soma = Double.parseDouble(valor);
     visor.setText(formatStrNumerica ("" + soma, casasDecimais));
@@ -220,27 +243,27 @@ public void teclouMultip(){
 
 public void teclouEnter() {
     if ((operador == "+") || (operador == "-")) {
-        rolopapel.append(alinharStringDir("--------------------" + "\n"));
-        rolopapel.append(alinharStringDir(formatStrNumerica("" + soma, casasDecimais)
+        rolopapel.append(alinhaStringDir("--------------------" + "\n"));
+        rolopapel.append(alinhaStringDir(formatStrNumerica("" + soma, casasDecimais)
                 + "T" + "\n"));
     }
     if ((operador == "/") && (soma != 0)) {
-        rolopapel.append(alinharStringDir(formatStrNumerica(valor, casasDecimais)
+        rolopapel.append(alinhaStringDir(formatStrNumerica(valor, casasDecimais)
                 + "" + "\n"));
-        rolopapel.append(alinharStringDir("--------------------" + "\n"));
+        rolopapel.append(alinhaStringDir("--------------------" + "\n"));
         soma = soma / Double.parseDouble(valor);
-        rolopapel.append(alinharStringDir(formatStrNumerica("" + soma, casasDecimais)
+        rolopapel.append(alinhaStringDir(formatStrNumerica("" + soma, casasDecimais)
                 + "-" + "\n"));
     }
     if (operador == "*") {
-        rolopapel.append(alinharStringDir(formatStrNumerica(valor, casasDecimais)
+        rolopapel.append(alinhaStringDir(formatStrNumerica(valor, casasDecimais)
                 + "+" + "\n"));
-        rolopapel.append(alinharStringDir("--------------------" + "\n"));
+        rolopapel.append(alinhaStringDir("--------------------" + "\n"));
         soma = soma * Double.parseDouble(valor);
-        rolopapel.append(alinharStringDir(formatStrNumerica("" + soma, casasDecimais)
+        rolopapel.append(alinhaStringDir(formatStrNumerica("" + soma, casasDecimais)
                 + "=" + "\n"));
-        rolopapel.append(alinharStringDir("" + "\n"));
-        visor.setText(formatStrNumerica(soma, casasDecimais));
+        rolopapel.append(alinhaStringDir("" + "\n"));
+        visor.setText(formatStrNumerica("" + soma, casasDecimais));
         valorAnterior = "" + soma;
         soma = 0;
         valor = "";
@@ -277,7 +300,7 @@ public void teclouEnter() {
     public ProjetoCalculadora() {
         super ("Calculadora 6.0 ) (Orriso)");
         container = getContentPane();
-        layout = new GridBaglayout();
+        layout = new GridBagLayout();
         constraints = new GridBagConstraints();
 
         botao1 = new JButton("1");
@@ -305,20 +328,20 @@ public void teclouEnter() {
         botaoPerc = new JButton("%");
         botaoPerc = new JButton("Tecle P ");
         botaoBackspace = new JButton("<");
-        botaoBackpsace = new JButton("Tecle Backspace");
+        botaoBackspace = new JButton("Tecle Backspace");
         keyCodigo = new JLabel("0");
         visor = new JLabel("0.00");
-        visor.setHorizontalAligment (SwingConstants.RIGHT);
+        visor.setHorizontalAlignment (SwingConstants.RIGHT);
         visor.setFont(new Font ("Courier New", Font.BOLD,16));
-        visor.setForegoround(Color.RED);
+        visor.setForeground(Color.RED);
         visor.setToolTipText("vAlores até 14 digitos");
-        roloPapel = new JTextArea(12,15);
-        roloPapel.setEditable(false);
-        roloPapel.setFont (new Font ("Courier New",Font.PLAIN,11));
-        scroll = new JScrollPane(roloPapel),
-                scrollPaneConstatants.VERTICAL SCROLIBAR ALWYS,
-        scrollPaneConstants.HORIZONTAL SCROLLBAR_NEVER);
-        scroll.setBorder(new LineBoder (Color.pink,3,true)) ;
+        rolopapel = new JTextArea(12,15);
+        rolopapel.setEditable(false);
+        rolopapel.setFont (new Font ("Courier New",Font.PLAIN,11));
+        scroll = new JScrollPane(rolopapel,
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+        ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setBorder(new LineBorder (Color.pink,3,true)) ;
         botao2dig = new JRadioButton("2", true);
         botao4dig = new JRadioButton("4", false);
         botao6dig = new JRadioButton("6 : Digitos Decimais", false);
@@ -343,7 +366,7 @@ public void teclouEnter() {
         botaoDiv.setFocusable(false);
         botaoPerc.setFocusable(false);
         botaoMultip.setFocusable(false);
-        botaoPapel.setFocusable(false);
+        rolopapel.setFocusable(false);
         botaoVirgula.setFocusable(false);
         botaoTotal.setFocusable(false);
         botaoBackspace.setFocusable(false);
@@ -355,17 +378,17 @@ public void teclouEnter() {
         constraints.weightx = 1 ;
         constraints.fill = GridBagConstraints.BOTH;
         addComponent (scroll, 0,0,5,1);
-        addComponent (visor,1,0,5,1,);
-        addComponent (botao2dig,2,0,1,1,);
+        addComponent (visor,1,0,5,1);
+        addComponent (botao2dig,2,0,1,1);
         addComponent (botao4dig,2,1,1,1);
-        addComponent (botao6dig (2,2,3,1);
-        contraints.weghtx = 0;
-        contraints.weghtx = 5;
+        addComponent (botao6dig,2,2,3,1);
+        constraints.weightx = 0;
+        constraints.weightx = 5;
         addComponent(botaoPerc, 3,0,1,1);
         addComponent(botaoCE, 3,4,1,1);
         addComponent(botaoC, 4,4,1,1);
         addComponent(botaoBackspace, 5,4,1,1);
-        addComponent(botaoDiv, 3,1,1,1,);
+        addComponent(botaoDiv, 3,1,1,1);
         addComponent(botaoMultip, 3,2,1,1);
         addComponent(botaoMenos, 3,3,1,1);
         addComponent(botao7, 4,0,1,1);
@@ -377,53 +400,54 @@ public void teclouEnter() {
         addComponent(botao6, 5,2,1,2);
         addComponent(botaoVirgula, 5,3,1,1);
         addComponent(botao1, 6,0,1,1);
-        addComponent(botao2, 6,1,1);
+        addComponent(botao2, 6,1,1,1);
         addComponent(botao3, 6,2,1,1);
         addComponent(botao0, 6,3,1,1);
         addComponent(botaoTotal, 6,4,1,1);
 
+        trataEventosAcao handletAcao = new trataEventosAcao ();
+        botaoC.addActionListener(handletAcao);
+        botaoCE.addActionListener(handletAcao);
+        botaoPerc.addActionListener(handletAcao);
+        botaoDiv.addActionListener(handletAcao);
+        botaoMultip.addActionListener(handletAcao);
+        botaoMenos.addActionListener(handletAcao);
+        botaoMais.addActionListener(handletAcao);
+        botaoTotal.addActionListener(handletAcao);
+        botaoVirgula.addActionListener(handletAcao);
+        botao1.addActionListener(handletAcao);
+        botao2.addActionListener(handletAcao);
+        botao3.addActionListener(handletAcao);
+        botao4.addActionListener(handletAcao);
+        botao5.addActionListener(handletAcao);
+        botao6.addActionListener(handletAcao);
+        botao7.addActionListener(handletAcao);
+        botao8.addActionListener(handletAcao);
+        botao9.addActionListener(handletAcao);
+        botao0.addActionListener(handletAcao);
+        botaoBackspace.addActionListener(handletAcao);
 
-
+        trataEventosFocus handlerFocus = new trataEventosFocus();
+        trataEventosRadio handletRadio = new trataEventosRadio();
+        botao2dig.addActionListener(handletAcao);
+        botao4dig.addActionListener(handletAcao);
+        botao6dig.addActionListener(handletAcao);
+        visor.addKeyListener(this);
+        setSize(285,480);
+        Dimension resVideo = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension tamForm = getSize();
+        setLocation ((resVideo.width - tamForm.width)/2,(resVideo.height - tamForm.height)/2);
+        setResizable(false);
+        setVisible(true);
     }
-    trataEventosAcao handletAcao = new trataEventosAcao ();
-    botaoC.addActionListener(handletAcao);
-    botaoCE.addActionListener(handletAcao);
-    botaoPerc.addActionListener(handletAcao);
-    botaoDiv.addActionListener(handletAcao);
-    botaoMultip.addActionListener(handletAcao);
-    botaoMenos.addActionListener(handletAcao);
-    botaoMais.addActionListener(handletAcao);
-    botaoTotal.addActionListener(handletAcao);
-    botaoVirgula.addActionListener(handletAcao);
-    botao1.addActionListener(handletAcao);
-    botao2.addActionListener(handletAcao);
-    botao3.addActionListener(handletAcao);
-    botao4.addActionListener(handletAcao);
-    botao5.addActionListener(handletAcao);
-    botao6.addActionListener(handletAcao);
-    botao7.addActionListener(handletAcao);
-    botao8.addActionListener(handletAcao);
-    botao9.addActionListener(handletAcao);
-    botao0.addActionListener(handletAcao);
-    botaoBackspace.addActionListener(handletAcao);
 
-    trataEventosFocus handletAcao = new trataEventosFocus();
-    trataEventosRadio handletAcao = new trataEventosRadio();
-    botao2dig.addActionListener(handletAcao);
-    botao1dig.addActionListener(handletAcao);
-    botao6dig.addActionListener(handletAcao);
-    visor.addKeyListener(this);
-    setSize(285,480);
-    Dimension resVideo = Toolkit.getDefaultToolkit().getScreenSize();
-    Dimension tamForm = getSize();
-    setLocation ((resVideo.width - tamForm.width)/2,(resVideo.height - tamForm.height)/2);
-    setResizable(false);
-    setVisible(true);
-}
+
+
 
 public static void main(String[] args) {
     ProjetoCalculadora app = new ProjetoCalculadora();
     app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 }
-
 }
+
+
