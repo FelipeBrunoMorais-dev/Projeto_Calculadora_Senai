@@ -1,0 +1,167 @@
+package projetocalculadora;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class ProjectCalculadora extends JFrame implements KeyListener {
+
+    private JButton botao1, botao2, botao3, botao4, botao5,
+            botao6, botao7, botao8, botao9, botao0;
+
+    private JButton botaoC, botaoCE, botaoDiv, botaoMultip,
+            botaoMenos, botaoMais, botaoVirgula,
+            botaoTotal, botaoPerc, botaoBackspace;
+
+    private JTextArea roloPapel;
+    private JLabel visor;
+
+    private double soma = 0;
+    private String valor = "", operador = "", valorAnterior = "";
+
+    private Container container;
+    private GridBagLayout layout;
+    private GridBagConstraints constraints;
+
+    private int casasDecimais = 2;
+
+    public ProjectCalculadora() {
+
+        super("Calculadora Java");
+
+        container = getContentPane();
+        layout = new GridBagLayout();
+        container.setLayout(layout);
+        constraints = new GridBagConstraints();
+
+        visor = new JLabel("0.00");
+        visor.setHorizontalAlignment(SwingConstants.RIGHT);
+        visor.setFont(new Font("Courier New", Font.BOLD, 18));
+        visor.setForeground(Color.RED);
+
+        roloPapel = new JTextArea(10,15);
+        roloPapel.setEditable(false);
+
+        JScrollPane scroll = new JScrollPane(roloPapel);
+
+        botao0 = new JButton("0");
+        botao1 = new JButton("1");
+        botao2 = new JButton("2");
+        botao3 = new JButton("3");
+        botao4 = new JButton("4");
+        botao5 = new JButton("5");
+        botao6 = new JButton("6");
+        botao7 = new JButton("7");
+        botao8 = new JButton("8");
+        botao9 = new JButton("9");
+
+        botaoMais = new JButton("+");
+        botaoMenos = new JButton("-");
+        botaoMultip = new JButton("*");
+        botaoDiv = new JButton("/");
+
+        botaoTotal = new JButton("=");
+        botaoC = new JButton("C");
+        botaoCE = new JButton("CE");
+
+        botaoVirgula = new JButton(",");
+        botaoBackspace = new JButton("<-");
+        botaoPerc = new JButton("%");
+
+        addComponente(scroll,0,0,4,1);
+        addComponente(visor,1,0,4,1);
+
+        addComponente(botao7,2,0,1,1);
+        addComponente(botao8,2,1,1,1);
+        addComponente(botao9,2,2,1,1);
+        addComponente(botaoDiv,2,3,1,1);
+
+        addComponente(botao4,3,0,1,1);
+        addComponente(botao5,3,1,1,1);
+        addComponente(botao6,3,2,1,1);
+        addComponente(botaoMultip,3,3,1,1);
+
+        addComponente(botao1,4,0,1,1);
+        addComponente(botao2,4,1,1,1);
+        addComponente(botao3,4,2,1,1);
+        addComponente(botaoMenos,4,3,1,1);
+
+        addComponente(botao0,5,0,1,1);
+        addComponente(botaoVirgula,5,1,1,1);
+        addComponente(botaoTotal,5,2,1,1);
+        addComponente(botaoMais,5,3,1,1);
+
+        botao0.addActionListener(e -> digitarNumero("0"));
+        botao1.addActionListener(e -> digitarNumero("1"));
+        botao2.addActionListener(e -> digitarNumero("2"));
+        botao3.addActionListener(e -> digitarNumero("3"));
+        botao4.addActionListener(e -> digitarNumero("4"));
+        botao5.addActionListener(e -> digitarNumero("5"));
+        botao6.addActionListener(e -> digitarNumero("6"));
+        botao7.addActionListener(e -> digitarNumero("7"));
+        botao8.addActionListener(e -> digitarNumero("8"));
+        botao9.addActionListener(e -> digitarNumero("9"));
+
+        botaoMais.addActionListener(e -> operacao("+"));
+        botaoMenos.addActionListener(e -> operacao("-"));
+        botaoMultip.addActionListener(e -> operacao("*"));
+        botaoDiv.addActionListener(e -> operacao("/"));
+
+        botaoTotal.addActionListener(e -> calcular());
+
+        setSize(300,400);
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+    private void addComponente(Component componente,int row,int col,int w,int h){
+
+        constraints.gridx = col;
+        constraints.gridy = row;
+        constraints.gridwidth = w;
+        constraints.gridheight = h;
+        constraints.fill = GridBagConstraints.BOTH;
+
+        layout.setConstraints(componente,constraints);
+        container.add(componente);
+    }
+
+    private void digitarNumero(String n){
+
+        valor = valor + n;
+        visor.setText(valor);
+    }
+
+    private void operacao(String op){
+
+        soma = Double.parseDouble(valor);
+        operador = op;
+        valor = "";
+    }
+
+    private void calcular(){
+
+        double v = Double.parseDouble(valor);
+
+        switch(operador){
+
+            case "+": soma += v; break;
+            case "-": soma -= v; break;
+            case "*": soma *= v; break;
+            case "/": soma /= v; break;
+        }
+
+        visor.setText(String.valueOf(soma));
+        valor="";
+    }
+
+    public void keyPressed(KeyEvent e){}
+    public void keyReleased(KeyEvent e){}
+    public void keyTyped(KeyEvent e){}
+
+    public static void main(String[] args){
+
+        new projetocalculadora.ProjectCalculadora();
+    }
+}
